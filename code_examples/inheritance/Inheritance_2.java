@@ -1,4 +1,4 @@
-package scraps;
+package code_examples.inheritance;
 
 public class Inheritance_2 {
 

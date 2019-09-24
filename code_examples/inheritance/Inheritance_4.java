@@ -1,7 +1,5 @@
-package scraps;
-
+package code_examples.inheritance;
 public class Inheritance_4 {
-
 	public static void main (String [] args ) {
 
 		C7 a = new C7();
@@ -10,7 +8,7 @@ public class Inheritance_4 {
 							
 		foo (a);
 		foo (b); 
-		foo (c); 	// which foo() function runs when this line is executed?
+		foo (c); 	
 		
 		a.print();
 		b.print();
