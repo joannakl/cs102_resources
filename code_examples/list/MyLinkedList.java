@@ -1,6 +1,9 @@
 package code_examples.list;
 
-public class MyLinkedList {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class MyLinkedList  implements Iterable<Person> {
 
 	
 	class Node {
@@ -147,8 +150,54 @@ public class MyLinkedList {
         return str; 
           
     }
+    
+    public Person get (int pos ) {
+    	if (pos < 0 || pos > size-1) throw new IndexOutOfBoundsException ("too large or too small"); 
+    	
+    	Node current = head; 
+    	int counter = 0; 
+    	while (counter < pos ) {
+    		current = current.next; 
+    		counter ++; 
+    	}
+    	return current.person; 
+    	
+    }
+
+
+	@Override
+	public Iterator<Person> iterator() {
+		
+		Iterator<Person> itr = new Itr(); 
+		
+		return itr;
+	}
 	
-	
+	private class Itr implements Iterator<Person> {
+		
+		Node current = head; 
+		
+		@Override
+		public boolean hasNext() {
+			
+			if (current != null ) 
+				return true; 
+			
+			return false;
+		}
+
+		@Override
+		public Person next() throws NoSuchElementException {
+			
+			if (current == null) throw new NoSuchElementException("reached the end of this collection"); 
+			Person p = current.person; 
+			current = current.next; 
+			
+			return p;
+		}
+		
+		
+	}
 	
 	
 	
