@@ -62,6 +62,7 @@ public class MyArrayList <E> {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public E get ( int pos ) throws IndexOutOfBoundsException {
 		if (pos < 0 || pos > size ) 
 			throw new IndexOutOfBoundsException (""

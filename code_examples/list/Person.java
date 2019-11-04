@@ -1,10 +1,17 @@
 package code_examples.list;
 
-public class Person {
+public class Person  implements Cloneable {
 
 	private int age;
 	private String name;
 	
+	public Object clone() {
+		Person p = Object.clone ( name, age);
+		//p.dob = dob; 
+		return p; 
+		
+		 
+	}
 	
 	public Person(String name, int age) throws IllegalArgumentException {
 		if (name == null) {
@@ -16,6 +23,10 @@ public class Person {
 		this.name = name;
 		this.age = age; 
 		
+	}
+	
+	public void setAge( int age ) {
+		this.age = age; 
 	}
 	
 
