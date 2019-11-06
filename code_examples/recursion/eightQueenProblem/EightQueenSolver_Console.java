@@ -1,5 +1,5 @@
 
-package lecture03.eightQueenProblem;
+package recursion.eightQueenProblem;
 
 import java.util.Random;
 

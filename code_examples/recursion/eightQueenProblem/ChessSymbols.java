@@ -1,4 +1,4 @@
-package lecture03.eightQueenProblem;
+package recursion.eightQueenProblem;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
