@@ -6,7 +6,7 @@ package recursion.sequences;
  * specified length and with added constraints.
  *  
  * @author Joanna Klukowska
- * @version August 4, 2015
+ * @version August 4, 2015, updated Nov. 3, 2019
  *
  */
 public class BinarySequences {
@@ -37,12 +37,13 @@ public class BinarySequences {
 	 */
 	private static void getAllBinarySequences ( int length, String seq ) {
 		if (seq.length() == length ) {//reached the desired length
-			System.out.printf("%s %n", seq.toString() );
+			System.out.printf("%s %n", seq );
 		}
 		else { //add the next bits to the sequence (two possibilities) 
+            
 			String seq0 = seq + "0"; //add zero to the current sequence 
 			getAllBinarySequences( length, seq0); 
-			String seq1 = seq + "1"; //replace the zero with one
+			String seq1 = seq + "1"; //add one to the current sequence
 			getAllBinarySequences( length, seq1);
 		}
 	}
@@ -70,7 +71,7 @@ public class BinarySequences {
 		}
 		else if (seq.length() == 2 ) { 
 			String seq0 = seq + "0"; //add zero to the current sequence 
-			getSomeBinarySequences( length, seq0); 			
+			getSomeBinarySequences( length, seq0); 
 		}
 		else { //add the next bits to the sequence (two possibilities) 
 			String seq0 = seq + "0"; //add zero to the current sequence 
@@ -88,7 +89,7 @@ public class BinarySequences {
 	 */
 	public static void getNoTwoZerosBinarySequences ( int length ) {
 		String seq = new String () ;
-		getNoTwoZerosBinarySequences( length, seq);
+		getNoTwoZerosBinarySequences( length, seq, 0 );
 	}
 	
 	/*
@@ -98,28 +99,22 @@ public class BinarySequences {
 	 * @param length the length of the sequences to be generated 
 	 * @param seq stores partial sequences between recursive calls  
 	 */
-	private static void getNoTwoZerosBinarySequences ( int length, String seq  ) {
+	private static void getNoTwoZerosBinarySequences ( int length, String seq, int zeroCount  ) {
 		//count the number of zero bits and do not continue
 		//if it is equal to two 
-		int countZeros = 0; 
-		for (int i = 0; i < seq.length(); i++ ) 
-			if (seq.charAt(i) == '0')
-				countZeros++;
-		if (countZeros==2) { 
-			return;
-		}
-		else{ 
-			if (seq.length() == length ) {//reached the desired length
-				System.out.printf("%s %n", seq.toString() );
-			}
-			else { //add the next bits to the sequence (two possibilities) 
-				
-				String seq0 = seq + "0"; //add zero to the current sequence 
-				getNoTwoZerosBinarySequences( length, seq0); 
-				String seq1 = seq + "1"; //replace the zero with one
-				getNoTwoZerosBinarySequences( length, seq1);
-			}
-		}
+
+        if (seq.length() == length ) {//reached the desired length
+            System.out.printf("%s %n", seq.toString() );
+        }
+        else { //add the next bits to the sequence (two possibilities) 
+            if (zeroCount < 2 ){
+                String seq0 = seq + "0"; //add zero to the current sequence 
+                getNoTwoZerosBinarySequences( length, seq0, zeroCount+1 ); 
+            }
+            String seq1 = seq + "1"; //replace the zero with one
+            getNoTwoZerosBinarySequences( length, seq1, zeroCount);
+        }
+    
 	}
 	
 
