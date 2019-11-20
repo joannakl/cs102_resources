@@ -28,11 +28,19 @@ public class QuickSort {
             System.out.printf("quickSort, l: %3d, r: %3d\n%s\n\n", 
                 left,right, printArray(array,left, right) );
         }
+        
+        
+        
         int pivotIndex = partition ( array, left, right) ;
+   
         if ( pivotIndex - left > 1 ) 
             quickSort( array, left, pivotIndex - 1 );
+   
         if ( right - pivotIndex > 1 )
             quickSort( array, pivotIndex + 1, right );
+   
+   
+   
     }
     
     public static int partition ( String [] array, 
