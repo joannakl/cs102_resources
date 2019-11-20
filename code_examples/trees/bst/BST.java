@@ -13,6 +13,10 @@ public class BST  {
 
         }
         System.out.println(tree.toStringTreeFormat() );
+
+        //tree.remove(4);
+        //System.out.println(tree.toStringTreeFormat() );
+
     }
 
 
@@ -26,11 +30,128 @@ public class BST  {
     }
 
     // add function
-    public void add( int val ) {
-				Node n = new Node (val) ;
-				root = n; 
+/*
+    public boolean add( int val ) {
+        if (root == null ) { 
+            Node n = new Node (val) ;
+            root = n;
+            return true; 
+        }
+        
+        return add (val, root); 
+        
     }
+    
+    private boolean add (int val, Node n ) { 
+        
+        //found duplicate 
+        if ( val == n.data) return false; 
+        
+        
+        if ( val < n.data ) { // go left 
+            if ( n.left == null ) {//attach it right here 
+                Node current = new Node (val); 
+                n.left = current; 
+                return true; 
+            }
+            else { // recurse to its left subtree 
+                return add(val, n.left) ; 
+            } 
+        }
+        else { // go right 
+            if ( n.right == null ) {//attach it right here 
+                Node current = new Node (val); 
+                n.right = current; 
+                return true; 
+            }
+            else { // recurse to its right subtree 
+                return add(val, n.right) ; 
+            } 
+            
+        } 
+    }
+*/ 
+
+	public boolean add ( int e ) {
+        int oldSize = size();
+        root  =  add ( e, root );
+        if (oldSize == size())
+            return false;
+        return true;
+	}
+
+	private Node add ( int item, Node root ) {
+
+        if ( root == null ) {
+                return new Node(item);
+        }
+        if ( root.data == item ) {
+                return root;
+        }
+        else if ( root.data < item  ) {
+                root.right =  add ( item, root.right );
+        }
+        else {
+                root.left = add ( item, root.left);
+        }
+        return root;
+	}
+
     // remove function
+
+
+
+		private boolean found ;
+        
+		public boolean remove(int val)
+		{
+			found = false;
+			root = recRemove(val, root);
+			return found;
+		}
+
+		private Node recRemove(int target, Node  node)
+		{
+			if (node == null)
+				found = false;
+			else if (target < node.data)
+				node.left = recRemove(target, node.left);
+			else if (target > node.data)
+				node.right = recRemove(target, node.right );
+			else {
+				node = removeNode(node);
+				found = true;
+			}
+			return node;
+		}
+
+		private Node removeNode(Node node)
+		{
+			int data;
+			
+            if (node.left == null)
+				return node.right ;
+			else if (node.right  == null)
+				return node.left;
+			
+            else {
+				data = getPredecessor(node.left);
+				node.data = data;
+				node.left = recRemove(data, node.left);
+				return node;
+			}
+		}
+
+		private int getPredecessor(Node subtree)
+		{
+			Node temp = subtree;
+			while (temp.right  != null)
+				temp = temp.right ;
+			return temp.data;
+		}
+
+
+
 
 
 
@@ -131,5 +252,91 @@ public class BST  {
         return s.toString();
     }
 
+
+
+
+
+
+
+
+
+/*
+
+
+
+	public boolean add ( int e ) {
+			int oldSize = size();
+			root  =  add ( e, root );
+			if (oldSize == size())
+				return false;
+			return true;
+	}
+
+	private Node add ( int item, Node root ) {
+
+			if ( root == null ) {
+					return new Node(item);
+			}
+			if ( root.data == item ) {
+					return root;
+			}
+			else if ( root.data < item  ) {
+					root.right =  add ( item, root.right );
+			}
+			else {
+					root.left = add ( item, root.left);
+			}
+			return root;
+	}
+
+
+
+
+		private boolean found ;
+		public boolean remove(int val)
+		{
+			found = false;
+			root = recRemove(val, root);
+			return found;
+		}
+
+		private Node recRemove(int target, Node  node)
+		{
+			if (node == null)
+				found = false;
+			else if (target < node.data)
+				node.left = recRemove(target, node.left);
+			else if (target > node.data)
+				node.right = recRemove(target, node.right );
+			else {
+				node = removeNode(node);
+				found = true;
+			}
+			return node;
+		}
+
+		private Node removeNode(Node node)
+		{
+			int data;
+			if (node.left == null)
+				return node.right ;
+			else if (node.right  == null)
+				return node.left;
+			else {
+				data = getPredecessor(node.left);
+				node.data = data;
+				node.left = recRemove(data, node.left);
+				return node;
+			}
+		}
+
+		private int getPredecessor(Node subtree)
+		{
+			Node temp = subtree;
+			while (temp.right  != null)
+				temp = temp.right ;
+			return temp.data;
+		}
+*/
 
 }
